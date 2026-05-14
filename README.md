@@ -22,7 +22,7 @@ Crie um arquivo `.env` com base em `.env.example`:
 
 ```env
 VITE_SUPABASE_URL=https://seu-projeto.supabase.co
-VITE_SUPABASE_ANON_KEY=sua-chave-anon-publica
+VITE_SUPABASE_KEY=sua-chave-publica
 ```
 
 ## Build
