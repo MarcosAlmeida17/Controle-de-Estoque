@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Relatórios | Controle de Estoque</title>
+    <script type="module" crossorigin src="../assets/relatorios-CCP1AvnN.js"></script>
+    <link rel="modulepreload" crossorigin href="../assets/main-CARpABQT.js">
+    <link rel="stylesheet" crossorigin href="../assets/main-a9ny4mcc.css">
+  </head>
+  <body class="min-h-screen bg-slate-100 text-slate-900">
+    <div class="flex min-h-screen">
+      <aside class="w-72 border-r border-slate-200 bg-white px-6 py-8 shadow-sm">
+        <a href="../index.html" class="mb-10 inline-flex items-center gap-3 text-2xl font-semibold text-slate-900">
+          <img src="../assets/logo-BusBlLlM.png" alt="Controle Estoque" class="h-10 w-10 rounded-2xl object-cover" onerror="this.style.display='none'" />
+          Controle Estoque
+        </a>
+        <nav class="space-y-2 text-sm text-slate-700">
+          <a href="../index.html" class="block rounded-xl px-4 py-3 hover:bg-slate-100">Dashboard</a>
+          <a href="estoque.html" class="block rounded-xl px-4 py-3 hover:bg-slate-100">Estoque</a>
+          <a href="produtos.html" class="block rounded-xl px-4 py-3 hover:bg-slate-100">Produtos</a>
+          <a href="relatorios.html" class="block rounded-xl bg-slate-100 px-4 py-3 font-semibold text-slate-900">Relatórios</a>
+          <a href="../login.html" data-logout class="block rounded-xl px-4 py-3 hover:bg-slate-100">Sair</a>
+        </nav>
+      </aside>
+      <main class="flex-1 p-8">
+        <div class="mb-6 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+          <div>
+            <p class="text-sm text-slate-500">Relatórios gerenciais</p>
+            <h1 class="text-3xl font-semibold text-slate-900">Relatórios</h1>
+          </div>
+          <button data-theme-toggle class="btn-secondary">Alternar tema</button>
+        </div>
+
+        <section class="grid gap-4 md:grid-cols-2 xl:grid-cols-4 mb-6">
+          <article class="card p-5">
+            <p class="text-sm font-medium text-slate-500">Registros totais</p>
+            <p id="relatorios-total" class="mt-4 text-3xl font-semibold text-slate-900">0</p>
+          </article>
+          <article class="card p-5">
+            <p class="text-sm font-medium text-slate-500">Entradas</p>
+            <p id="relatorios-entradas" class="mt-4 text-3xl font-semibold text-slate-900">0</p>
+          </article>
+          <article class="card p-5">
+            <p class="text-sm font-medium text-slate-500">Saídas</p>
+            <p id="relatorios-saidas" class="mt-4 text-3xl font-semibold text-slate-900">0</p>
+          </article>
+          <article class="card p-5">
+            <p class="text-sm font-medium text-slate-500">Produtos distintos</p>
+            <p id="relatorios-produtos-distintos" class="mt-4 text-3xl font-semibold text-slate-900">0</p>
+          </article>
+        </section>
+
+        <form id="form-filtros-relatorios" class="card grid gap-4 lg:grid-cols-5 lg:items-end">
+          <label class="text-sm font-medium text-slate-600">
+            Produto
+            <input name="produto" type="text" placeholder="Nome ou código" class="mt-2 w-full" />
+          </label>
+          <label class="text-sm font-medium text-slate-600">
+            Categoria
+            <input name="categoria" type="text" placeholder="Categoria" class="mt-2 w-full" />
+          </label>
+          <label class="text-sm font-medium text-slate-600">
+            Tipo
+            <select name="tipo" class="mt-2 w-full">
+              <option value="todos">Todos</option>
+              <option value="entrada">Entrada</option>
+              <option value="saida">Saída</option>
+            </select>
+          </label>
+          <label class="text-sm font-medium text-slate-600">
+            Início
+            <input name="inicio" type="date" class="mt-2 w-full" />
+          </label>
+          <label class="text-sm font-medium text-slate-600">
+            Fim
+            <input name="fim" type="date" class="mt-2 w-full" />
+          </label>
+          <div class="flex gap-2 lg:col-span-5">
+            <button class="btn-primary" type="submit">Aplicar filtros</button>
+            <button id="limpar-filtros-relatorios" class="btn-secondary" type="button">Limpar</button>
+          </div>
+        </form>
+
+        <section class="mt-8">
+          <div class="card">
+            <div class="mb-4 flex items-center justify-between">
+              <div>
+                <p class="text-sm font-medium text-slate-500">Resultados</p>
+                <h2 class="mt-2 text-xl font-semibold text-slate-900">Movimentações filtradas</h2>
+              </div>
+            </div>
+            <div class="table-responsive">
+              <table class="table w-full min-w-[900px] border-separate border-spacing-0">
+                <thead class="bg-slate-50">
+                  <tr>
+                    <th>Data</th>
+                    <th>Produto</th>
+                    <th>Categoria</th>
+                    <th>Tipo</th>
+                    <th>Quantidade</th>
+                    <th>Observação</th>
+                    <th>Usuário</th>
+                  </tr>
+                </thead>
+                <tbody id="tabela-relatorios"></tbody>
+              </table>
+            </div>
+            <div class="mt-4 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+              <p id="info-paginacao-relatorios" class="text-sm text-slate-500">Página 1</p>
+              <div class="flex gap-2">
+                <button id="pagina-anterior-relatorios" class="btn-secondary" type="button">Anterior</button>
+                <button id="proxima-pagina-relatorios" class="btn-secondary" type="button">Próxima</button>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>
