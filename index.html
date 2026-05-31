@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Controle de Estoque</title>
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body class="min-h-screen bg-slate-100 text-slate-900">
+    <div class="flex min-h-screen">
+      <aside class="w-72 border-r border-slate-200 bg-white px-6 py-8 shadow-sm">
+        <a href="index.html" class="mb-10 inline-flex items-center gap-3 text-2xl font-semibold text-slate-900">
+          <img src="assets/logo.png" alt="Controle Estoque" class="h-10 w-10 rounded-2xl object-cover" onerror="this.style.display='none'" />
+          Controle Estoque
+        </a>
+        <nav class="space-y-2 text-sm text-slate-700">
+          <a href="index.html" class="block rounded-xl bg-slate-100 px-4 py-3 font-semibold text-slate-900">Dashboard</a>
+          <a href="pages/estoque.html" class="block rounded-xl px-4 py-3 hover:bg-slate-100">Estoque</a>
+          <a href="pages/produtos.html" class="block rounded-xl px-4 py-3 hover:bg-slate-100">Produtos</a>
+          <a href="pages/relatorios.html" class="block rounded-xl px-4 py-3 hover:bg-slate-100">Relatórios</a>
+          <a href="login.html" data-logout class="block rounded-xl px-4 py-3 hover:bg-slate-100">Sair</a>
+        </nav>
+      </aside>
+
+      <main class="flex-1 p-8">
+        <header class="mb-8 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+          <div>
+            <p class="text-sm text-slate-500">Bem-vindo ao sistema</p>
+            <h1 class="text-3xl font-semibold text-slate-900">Dashboard de estoque</h1>
+          </div>
+          <div class="flex items-center gap-3">
+            <button data-theme-toggle class="btn-secondary">Alternar tema</button>
+            <a href="login.html" data-logout class="btn-primary">Sair</a>
+          </div>
+        </header>
+
+        <section id="dashboard-summary" class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+          <article class="card">
+            <p class="text-sm font-medium text-slate-500">Total de produtos</p>
+            <p id="total-produtos" class="mt-4 text-3xl font-semibold text-slate-900">0</p>
+          </article>
+          <article class="card">
+            <p class="text-sm font-medium text-slate-500">Produtos ativos</p>
+            <p id="produtos-ativos" class="mt-4 text-3xl font-semibold text-slate-900">0</p>
+          </article>
+          <article class="card">
+            <p class="text-sm font-medium text-slate-500">Estoque abaixo do mínimo</p>
+            <p id="estoque-baixo" class="mt-4 text-3xl font-semibold text-slate-900">0</p>
+          </article>
+          <article class="card">
+            <p class="text-sm font-medium text-slate-500">Entradas hoje</p>
+            <p id="entradas-hoje" class="mt-4 text-3xl font-semibold text-slate-900">0</p>
+          </article>
+          <article class="card">
+            <p class="text-sm font-medium text-slate-500">Saídas hoje</p>
+            <p id="saidas-hoje" class="mt-4 text-3xl font-semibold text-slate-900">0</p>
+          </article>
+          <article class="card">
+            <p class="text-sm font-medium text-slate-500">Valor total do estoque</p>
+            <p id="valor-estoque" class="mt-4 text-3xl font-semibold text-slate-900">R$ 0,00</p>
+          </article>
+        </section>
+
+        <section class="mt-8">
+          <div class="card">
+            <div class="mb-4 flex items-center justify-between">
+              <div>
+                <p class="text-sm font-medium text-slate-500">Últimas movimentações</p>
+                <h2 class="mt-2 text-xl font-semibold text-slate-900">Histórico recente</h2>
+              </div>
+              <a href="pages/relatorios.html" class="text-sm font-semibold text-sky-600 hover:text-sky-700">Ver relatório completo</a>
+            </div>
+            <div class="table-responsive">
+              <table class="table w-full min-w-[640px] border-separate border-spacing-0">
+                <thead class="bg-slate-50">
+                  <tr>
+                    <th>Data</th>
+                    <th>Produto</th>
+                    <th>Tipo</th>
+                    <th>Quantidade</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="ultimas-movimentacoes">
+                  <tr>
+                    <td class="border-t border-slate-200">--</td>
+                    <td class="border-t border-slate-200">--</td>
+                    <td class="border-t border-slate-200">--</td>
+                    <td class="border-t border-slate-200">--</td>
+                    <td class="border-t border-slate-200">--</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script type="module" src="./js/main.js"></script>
+  </body>
+</html>

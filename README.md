@@ -101,6 +101,17 @@ Requisitos mínimos:
 - Garantir que os caminhos funcionem em ambiente estático.
 - Não depender de servidor próprio.
 
+### Deploy com GitHub Pages
+
+Use os scripts do `package.json` para publicar no GitHub Pages:
+
+```bash
+npm install
+npm run deploy
+```
+
+Se necessário, ajuste o nome do repositório no GitHub e confirme que a opção de Pages esteja apontando para a branch `gh-pages`.
+
 ## Observação para agentes de IA
 
 Qualquer agente de IA que trabalhe neste repositório deve tratar [AGENTS.md](AGENTS.md), [DESIGN_SYSTEM.md](DESIGN_SYSTEM.md) e [MEMORY.md](MEMORY.md) como fontes obrigatórias de contexto.

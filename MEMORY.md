@@ -1,210 +1,129 @@
 # MEMORY.md
 
-Este arquivo registra o contexto funcional do projeto. Ele serve como memória de referência para alunos e agentes de IA entenderem **o que o sistema é**, quais entidades existem e quais decisões já foram tomadas.
-
-Use este arquivo para orientar **o que precisa ser lembrado sobre o projeto**.
-
 ## Contexto do projeto
 
-Sistema didático de controle de estacionamento para uso em sala de aula.
-
-O sistema terá duas áreas principais:
-
-1. Área do proprietário.
-2. Área do cliente mensalista.
+Sistema didático de Controle de Estoque para uso acadêmico.
 
 ## Tecnologias
 
 ### Front-end
-
-- HTML.
-- Tailwind CSS.
-- JavaScript Vanilla.
-- Vite.
-- SweetAlert2.
+- HTML
+- Tailwind CSS
+- JavaScript Vanilla
+- Vite
+- SweetAlert2
 
 ### Back-end
+- Supabase
 
-- Supabase.
+## Objetivo
 
-## Objetivo do sistema
+Permitir:
 
-Permitir o controle de clientes mensalistas e avulsos, incluindo:
-
-- Cadastro de marcas.
-- Cadastro de modelos.
-- Cadastro de clientes.
-- Cadastro de veículos.
-- Registro de entrada.
-- Registro de saída.
-- Consulta de veículos no pátio.
-- Histórico de movimentações.
-
-## Perfis do sistema
-
-### Proprietário
-
-- Login.
+- Cadastro de categorias.
+- Cadastro de fornecedores.
+- Cadastro de produtos.
+- Controle de entradas.
+- Controle de saídas.
+- Controle de estoque mínimo.
+- Relatórios gerenciais.
 - Dashboard administrativo.
-- CRUD de marcas.
-- CRUD de modelos.
-- CRUD de clientes.
-- CRUD de veículos.
-- Controle de entrada e saída.
-- Consulta ao pátio.
-- Consulta ao histórico.
 
-### Cliente mensalista
+## Perfis
 
-- Login.
-- Consulta dos próprios veículos.
-- Consulta do próprio histórico.
+### Administrador
+- Dashboard.
+- CRUD completo.
+- Relatórios.
+- Gestão de usuários.
+
+### Operador
+- Entradas.
+- Saídas.
+- Consulta de produtos.
+- Consulta de relatórios.
 
 ## Estrutura principal
 
-```text
-/estacionamentos
+/controle-estoque
 ├── index.html
 ├── login.html
-├── /pages
-├── /cliente
-├── /js
-├── /css
-└── /assets
-```
-
-## Autenticação
-
-O sistema utiliza a autenticação do Supabase com e-mail e senha.
-
-Após o login, o perfil do usuário é consultado na tabela `perfis`.
-
-Tipos de usuário:
-
-- `proprietario`
-- `cliente`
-
-### Fluxo
-
-- Usuário acessa `login.html`.
-- Após autenticação, consulta-se o perfil.
-- Proprietário é redirecionado para `pages/dashboard.html`.
-- Cliente é redirecionado para `cliente/dashboard-cliente.html`.
-- O logout encerra a sessão e retorna para `login.html`.
+├── pages
+├── js
+├── css
+├── assets
 
 ## Entidades
 
 ### perfis
+- id
+- user_id
+- nome
+- email
+- tipo_usuario
 
-- `id`
-- `user_id`
-- `nome`
-- `email`
-- `tipo_usuario`
+### categorias
+- id
+- nome
+- descricao
+- ativo
 
-### marcas
+### fornecedores
+- id
+- nome
+- telefone
+- email
+- endereco
+- ativo
 
-- `id`
-- `nome`
+### produtos
+- id
+- categoria_id
+- fornecedor_id
+- codigo
+- nome
+- descricao
+- preco_custo
+- preco_venda
+- estoque_atual
+- estoque_minimo
+- ativo
 
-### modelos
-
-- `id`
-- `marca_id`
-- `nome`
-
-### clientes
-
-- `id`
-- `user_id`
-- `nome`
-- `telefone`
-- `email`
-- `ativo`
-
-### veiculos
-
-- `id`
-- `cliente_id`
-- `marca_id`
-- `modelo_id`
-- `placa`
-- `cor`
-- `tipo_cliente`
-- `ativo`
-
-### movimentacoes
-
-- `id`
-- `veiculo_id`
-- `data_hora_entrada`
-- `data_hora_saida`
-- `valor_cobrado`
-- `status`
+### movimentacoes_estoque
+- id
+- produto_id
+- tipo_movimentacao
+- quantidade
+- observacao
+- usuario_id
+- data_movimentacao
 
 ## Regras de negócio
 
-- Apenas o proprietário pode administrar cadastros.
-- O cliente mensalista acessa somente seus próprios dados.
-- Veículos avulsos não precisam estar vinculados a clientes.
-- Um veículo não pode ter duas entradas em aberto.
-- A saída somente pode ocorrer se houver entrada aberta.
-- A saída encerra a movimentação aberta.
-- Preferir inativação lógica em vez de exclusão física.
+- Não permitir estoque negativo.
+- Toda entrada aumenta o estoque.
+- Toda saída reduz o estoque.
+- Produtos inativos não podem receber movimentações.
+- Toda movimentação deve ser registrada.
+- Alertar quando estoque estiver abaixo do mínimo.
+- Exibir indicadores reais no dashboard.
 
-## Movimentações
+## Relatórios
 
-- `pages/movimentacoes.html` usa `js/pages/movimentacoes.js`.
-- `pages/patio.html` usa `js/pages/patio.js`.
-- `pages/historico.html` usa `js/pages/historico.js`.
-- Entrada: buscar placa em `veiculos`, exigir veículo ativo e bloquear se houver movimentação `aberta`.
-- Saída: exigir movimentação `aberta`, preencher `data_hora_saida`, `valor_cobrado` e mudar `status` para `encerrada`.
-- Pátio: listar somente movimentações `aberta`, com dados do veículo, cliente e horário de entrada.
-- Histórico: listar movimentações abertas e encerradas, com filtros por placa, período e status.
-- Pátio e histórico devem manter paginação com `.range(inicio, fim)` e `count: 'exact'`.
-- Todas as mensagens de validação, confirmação, sucesso e erro devem usar SweetAlert2.
+- Produtos com estoque baixo.
+- Entradas por período.
+- Saídas por período.
+- Histórico completo.
+- Produtos mais movimentados.
+- Valor financeiro do estoque.
 
 ## Dashboard
 
-- `pages/dashboard.html` usa `js/pages/dashboard.js` para carregar dados reais.
-- Cards do dashboard devem ser coloridos e usar Heroicons.
-- Indicadores do dashboard:
-  - Veículos no pátio: contar `movimentacoes.status = 'aberta'`.
-  - Mensalistas ativos: contar `clientes.ativo = true`.
-  - Entradas hoje: contar `movimentacoes.data_hora_entrada` no intervalo do dia.
-  - Saídas hoje: contar `movimentacoes.data_hora_saida` no intervalo do dia.
-- Movimentações recentes: buscar até 5 registros em `movimentacoes`, ordenados por `data_hora_entrada` decrescente.
-- Erros de carregamento do dashboard devem aparecer com SweetAlert2.
-
-## Supabase RLS e GRANT
-
-RLS não substitui `GRANT`. Toda tabela usada pelo front-end precisa ter permissão SQL para o papel `authenticated`; depois a policy RLS define quais linhas o usuário pode acessar.
-
-Sempre manter estes grants no schema ou em script de correção:
-
-```sql
-grant usage on schema public to authenticated;
-
-grant select on public.perfis to authenticated;
-grant all on public.marcas to authenticated;
-grant all on public.modelos to authenticated;
-grant all on public.clientes to authenticated;
-grant all on public.veiculos to authenticated;
-grant all on public.movimentacoes to authenticated;
-
-grant execute on function public.usuario_e_proprietario() to authenticated;
-```
-
-Se surgir `permission denied for table ...`, conferir os grants antes de alterar o front-end.
-
-## Deploy
-
-O projeto será publicado no GitHub Pages.
-
-### Requisitos
-
-- O build deve ser gerado na pasta `dist/`.
-- Todos os caminhos devem ser compatíveis com hospedagem estática.
-- O projeto deve utilizar `import.meta.env`.
-- O `vite.config.js` deve definir corretamente a propriedade `base`.
-- A dependência `gh-pages` pode ser usada para publicação quando necessário.
+Indicadores mínimos:
+- Total de produtos.
+- Produtos ativos.
+- Produtos com estoque baixo.
+- Entradas hoje.
+- Saídas hoje.
+- Valor total em estoque.
+- Últimas movimentações.
