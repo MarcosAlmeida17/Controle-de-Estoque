@@ -2,7 +2,7 @@
 
 Projeto didático para controle de estacionamento, desenvolvido para uso em sala de aula com HTML, Tailwind CSS, JavaScript Vanilla, Vite, SweetAlert2 e Supabase.
 
-O objetivo é construir uma aplicação administrativa com autenticação, cadastros, controle de entrada e saída de veículos, consulta do pátio e histórico de movimentações.
+O objetivo é construir uma aplicação administrativa com autenticação, cadastros, controle de entrada e saída de estoque, consulta do produtos e histórico de movimentações.
 
 ## Documentos obrigatórios do projeto
 
@@ -25,9 +25,8 @@ O sistema deve contemplar:
 - CRUD de modelos.
 - CRUD de clientes.
 - CRUD de veículos.
-- Registro de entrada de veículo.
-- Registro de saída de veículo.
-- Consulta de veículos no pátio.
+- Registro de entrada
+- Registro de saída
 - Histórico de movimentações.
 - Dashboard com dados reais do Supabase.
 
@@ -44,16 +43,6 @@ O sistema deve contemplar:
 - Manter textos visíveis em português do Brasil com acentuação correta.
 - Usar paginação com `.range(inicio, fim)` e `count: 'exact'` nas listagens.
 - Configurar RLS e GRANTs necessários no Supabase.
-
-## Regras de negócio importantes
-
-- Um veículo ativo pode ter apenas uma movimentação aberta.
-- Entrada de veículo deve buscar a placa em `veiculos` e exigir veículo ativo.
-- Saída de veículo deve exigir movimentação aberta.
-- Ao encerrar uma saída, preencher `data_hora_saida`, `valor_cobrado` e alterar `status` para `encerrada`.
-- O pátio deve listar somente movimentações com `status = 'aberta'`.
-- O histórico deve listar movimentações abertas e encerradas, com filtros por placa, período e status.
-- Cadastros com campo `ativo` devem preferir inativação lógica em vez de exclusão física.
 
 ## Estrutura esperada
 

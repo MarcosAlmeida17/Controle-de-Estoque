@@ -83,7 +83,7 @@ body.dark .card {
   @apply px-4 py-3 text-left text-sm text-slate-700;
 }
 
-..table th {
+.table th {
   @apply text-slate-500 uppercase tracking-[0.12em] text-[11px];
 }
 
