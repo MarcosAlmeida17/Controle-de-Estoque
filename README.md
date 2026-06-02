@@ -1,6 +1,6 @@
 # Sistema Didático de Controle de Estoque
 
-Projeto didático para controle de estacionamento, desenvolvido para uso em sala de aula com HTML, Tailwind CSS, JavaScript Vanilla, Vite, SweetAlert2 e Supabase.
+Projeto didático para controle de estoque, desenvolvido para uso em sala de aula com HTML, Tailwind CSS, JavaScript Vanilla, Vite, SweetAlert2 e Supabase.
 
 O objetivo é construir uma aplicação administrativa com autenticação, cadastros, controle de entrada e saída de estoque, consulta do produtos e histórico de movimentações.
 
@@ -24,7 +24,7 @@ O sistema deve contemplar:
 - CRUD de marcas.
 - CRUD de modelos.
 - CRUD de clientes.
-- CRUD de veículos.
+- CRUD de produtos.
 - Registro de entrada
 - Registro de saída
 - Histórico de movimentações.
