@@ -1,4 +1,4 @@
-# Sistema Didático de Controle de Estacionamento
+# Sistema Didático de Controle de Estoque
 
 Projeto didático para controle de estacionamento, desenvolvido para uso em sala de aula com HTML, Tailwind CSS, JavaScript Vanilla, Vite, SweetAlert2 e Supabase.
 
