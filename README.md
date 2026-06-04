@@ -19,11 +19,6 @@ Esses três arquivos são parte essencial do projeto. Eles evitam perda de conte
 O sistema deve contemplar:
 
 - Login com autenticação nativa do Supabase.
-- Área do proprietário.
-- Área do cliente mensalista.
-- CRUD de marcas.
-- CRUD de modelos.
-- CRUD de clientes.
 - CRUD de produtos.
 - Registro de entrada
 - Registro de saída
